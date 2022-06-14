@@ -11,6 +11,18 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+      "@config/*": [
+        "src/config/*"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
+      "@shared/*": [
+        "src/shared/*"
+      ]
+    }
   }
 }

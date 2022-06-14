@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "API desenvolcida durante o curso \"API Restful Javascript com Node.js, Typescript, TypeORM etc\"",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix"
   },
@@ -27,6 +27,7 @@
     "eslint-plugin-prettier": "^3.2.0",
     "prettier": "^2.7.0",
     "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.0.0",
     "typescript": "^4.7.3"
   }
 }
