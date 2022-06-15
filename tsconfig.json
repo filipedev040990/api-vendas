@@ -12,16 +12,16 @@
     "strict": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
       "@config/*": [
-        "src/config/*"
+        "config/*"
       ],
       "@modules/*": [
-        "src/modules/*"
+        "modules/*"
       ],
       "@shared/*": [
-        "src/shared/*"
+        "shared/*"
       ]
     }
   }
