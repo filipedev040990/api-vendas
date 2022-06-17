@@ -1,9 +1,9 @@
 import { EntityRepository, Repository } from 'typeorm';
-import Product from '../entities/Products';
+import Products from '../entities/Products';
 
-@EntityRepository(Product)
-export class ProductRepository extends Repository<Product> {
-  public async findByName(name: string): Promise<Product | undefined> {
+@EntityRepository(Products)
+export class ProductRepository extends Repository<Products> {
+  public async findByName(name: string): Promise<Products | undefined> {
     return this.findOne({ where: { name } });
   }
 }
