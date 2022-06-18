@@ -20,7 +20,7 @@ export default class CreateUserService {
     const userExists = await userRepository.findByEmail(email);
 
     if (userExists) {
-      throw new AppError('Email adress already used');
+      throw new AppError('Email address already used');
     }
 
     const password_hashed = await hash(password, 10);

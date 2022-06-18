@@ -38,13 +38,14 @@ export default class UserController {
     res: Response,
   ): Promise<Response> {
     const { email } = req.params;
-    const user = ShowUserByEmailService.execute(email);
+    const user = await ShowUserByEmailService.execute(email);
 
     return res.status(200).json(user);
   }
 
-  public static async delete(req: Request, res: Response): Promise<void> {
+  public static async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
     await DeleteUserService.execute(id);
+    return res.status(200).json({});
   }
 }
