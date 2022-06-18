@@ -1,17 +1,15 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Users from '../typeorm/entities/Users';
 import { UserRepository } from '../typeorm/repositories/UsersRepository';
 
-export default class ShowUserByEmail {
-  public static async execute(email: string): Promise<Users | undefined> {
+export default class DeleteUserService {
+  public static async execute(id: string): Promise<void> {
     const userRepository = getCustomRepository(UserRepository);
-    const user = userRepository.findByEmail(email);
+    const user = await userRepository.findById(id);
 
     if (!user) {
       throw new AppError('User not found');
     }
-
-    return user;
+    await userRepository.remove(user);
   }
 }

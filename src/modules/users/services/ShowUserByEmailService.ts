@@ -3,14 +3,15 @@ import { getCustomRepository } from 'typeorm';
 import Users from '../typeorm/entities/Users';
 import { UserRepository } from '../typeorm/repositories/UsersRepository';
 
-export default class ShowUserByIdService {
-  public static async execute(id: string): Promise<Users | undefined> {
+export default class ShowUserByEmailService {
+  public static async execute(email: string): Promise<Users | undefined> {
     const userRepository = getCustomRepository(UserRepository);
-    const user = await userRepository.findById(id);
+    const user = userRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError('User not found');
     }
+
     return user;
   }
 }
