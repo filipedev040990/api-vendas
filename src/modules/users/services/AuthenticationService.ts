@@ -20,8 +20,6 @@ export default class AuthenticationService {
     email,
     password,
   }: IRequest): Promise<IResponse> {
-    const secret_key = process.env.SECRET_KEY_JWT as string;
-
     const userRepository = getCustomRepository(UserRepository);
 
     const user = await userRepository.findByEmail(email);
