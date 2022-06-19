@@ -14,7 +14,7 @@ interface IRequest {
 //   token: '123456798';
 // }
 
-export default class CreateSessionService {
+export default class AutenticationService {
   public static async execute({ email, password }: IRequest): Promise<Users> {
     const userRepository = getCustomRepository(UserRepository);
 
