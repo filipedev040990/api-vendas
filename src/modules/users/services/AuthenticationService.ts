@@ -2,6 +2,7 @@ import AppError from '@shared/errors/AppError';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { getCustomRepository } from 'typeorm';
+import authConfig from '@config/auth';
 import { UserRepository } from '../typeorm/repositories/UsersRepository';
 
 interface IRequest {
@@ -33,9 +34,13 @@ export default class AuthenticationService {
       throw new AppError('Invalid user/password', 401);
     }
 
-    const token = sign({ id: user.id, email: user.email }, secret_key, {
-      expiresIn: '1d',
-    });
+    const token = sign(
+      { id: user.id, email: user.email },
+      authConfig.jwt.secret as string,
+      {
+        expiresIn: authConfig.jwt.expiresIn,
+      },
+    );
     return {
       email: user.email,
       token: token,
