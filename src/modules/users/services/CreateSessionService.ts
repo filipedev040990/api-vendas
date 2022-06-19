@@ -20,12 +20,12 @@ export default class CreateSessionService {
 
     const user = await userRepository.findByEmail(email);
     if (!user) {
-      throw new AppError('Invalid user/password');
+      throw new AppError('Invalid user/password', 401);
     }
 
     const passwordIsValid = await compare(password, user.password);
     if (!passwordIsValid) {
-      throw new AppError('Invalid user/password');
+      throw new AppError('Invalid user/password', 401);
     }
     return user;
   }
