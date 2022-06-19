@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 import { getCustomRepository } from 'typeorm';
-import Users from '../typeorm/entities/Users';
 import { UserRepository } from '../typeorm/repositories/UsersRepository';
 
 interface IRequest {
@@ -9,13 +9,18 @@ interface IRequest {
   password: string;
 }
 
-// interface IResponse {
-//   user: Users;
-//   token: '123456798';
-// }
+interface IResponse {
+  email: string;
+  token: string;
+}
 
 export default class AuthenticationService {
-  public static async execute({ email, password }: IRequest): Promise<Users> {
+  public static async execute({
+    email,
+    password,
+  }: IRequest): Promise<IResponse> {
+    const secret_key = process.env.SECRET_KEY_JWT as string;
+
     const userRepository = getCustomRepository(UserRepository);
 
     const user = await userRepository.findByEmail(email);
@@ -27,6 +32,13 @@ export default class AuthenticationService {
     if (!passwordIsValid) {
       throw new AppError('Invalid user/password', 401);
     }
-    return user;
+
+    const token = sign({ id: user.id, email: user.email }, secret_key, {
+      expiresIn: '1d',
+    });
+    return {
+      email: user.email,
+      token: token,
+    };
   }
 }
