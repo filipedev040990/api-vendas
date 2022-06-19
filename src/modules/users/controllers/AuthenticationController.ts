@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import CreateSessionService from '../services/AutenticationService';
+import AuthenticationService from '../services/AuthenticationService';
 
-export default class SessionController {
+export default class AuthenticationController {
   public static async create(req: Request, res: Response): Promise<Response> {
     const { email, password } = req.body;
-    const user = await CreateSessionService.execute({ email, password });
+    const user = await AuthenticationService.execute({ email, password });
     return res.status(200).json(user);
   }
 }

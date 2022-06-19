@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import SessionController from '../controllers/AutenticationController';
+import AuthenticationController from '../controllers/AuthenticationController';
 import { celebrate, Joi, Segments } from 'celebrate';
 
 const sessionRouter = Router();
@@ -12,7 +12,7 @@ sessionRouter.post(
       password: Joi.string().required(),
     },
   }),
-  SessionController.create,
+  AuthenticationController.create,
 );
 
 export default sessionRouter;
