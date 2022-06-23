@@ -4,8 +4,7 @@ import SendForgotPasswordEmailService from '../services/SendForgotPasswordEmailS
 export default class ForgotPasswordController {
   public static async create(req: Request, res: Response): Promise<Response> {
     const { email } = req.body;
-    await SendForgotPasswordEmailService.execute(email);
-
+    await SendForgotPasswordEmailService.execute({ email });
     return res.status(204).json();
   }
 }
