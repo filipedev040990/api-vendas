@@ -20,8 +20,14 @@ export default class UserController {
 
   public static async update(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    const { name, email, password } = req.body;
-    const user = await UpdateUserService.execute({ id, name, email, password });
+    const { name, email, password, old_password } = req.body;
+    const user = await UpdateUserService.execute({
+      id,
+      name,
+      email,
+      password,
+      old_password,
+    });
 
     return res.status(200).json(user);
   }
