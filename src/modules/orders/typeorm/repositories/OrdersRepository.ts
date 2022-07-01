@@ -14,7 +14,7 @@ interface IRequest {
 }
 
 @EntityRepository(Orders)
-export default class OrderProductsRepository extends Repository<Orders> {
+export default class OrdersRepository extends Repository<Orders> {
   public async findById(id: string): Promise<Orders | undefined> {
     return this.findOne(id, {
       relations: ['customer_id', 'order_products'],
