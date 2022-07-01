@@ -3,7 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -13,7 +13,7 @@ class Orders {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToMany(() => Customers)
+  @ManyToOne(() => Customers)
   @JoinColumn({ name: 'customer_id' })
   customer_id: string;
 
