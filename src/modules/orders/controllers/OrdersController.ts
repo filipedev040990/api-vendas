@@ -15,7 +15,7 @@ export default class OrdersController {
     return res.status(200).json(order);
   }
 
-  public static async create(req: Request, res: Response): Promise<Response>{
+  public static async create(req: Request, res: Response): Promise<Response> {
     const { customer_id, products } = req.body;
     const order = await CreateOrderService.execute({ customer_id, products });
     return res.status(200).json(order);
