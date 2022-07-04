@@ -5,11 +5,12 @@ import ListUsersService from '../services/ListUsersService';
 import ShowUserByEmailService from '../services/ShowUserByEmailService';
 import ShowUserByIdService from '../services/ShowUserByIdService';
 import UpdateUserService from '../services/UpdateUserService';
+import { instanceToInstance } from 'class-transformer';
 
 export default class UserController {
   public static async index(req: Request, res: Response): Promise<Response> {
     const users = await ListUsersService.execute();
-    return res.status(200).json(users);
+    return res.status(200).json(instanceToInstance(users));
   }
 
   public static async create(req: Request, res: Response): Promise<Response> {
@@ -29,14 +30,14 @@ export default class UserController {
       old_password,
     });
 
-    return res.status(200).json(user);
+    return res.status(200).json(instanceToInstance(user));
   }
 
   public static async showById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
     const user = await ShowUserByIdService.execute(id);
 
-    return res.status(200).json(user);
+    return res.status(200).json(instanceToInstance(user));
   }
 
   public static async showByEmail(
