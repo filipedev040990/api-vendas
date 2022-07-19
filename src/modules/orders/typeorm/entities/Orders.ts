@@ -1,4 +1,4 @@
-import Customers from '@modules/customers/typeorm/entities/Customers';
+import Customers from '@modules/customers/infra/typeorm/entities/Customers';
 import {
   CreateDateColumn,
   Entity,
