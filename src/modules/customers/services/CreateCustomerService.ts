@@ -2,7 +2,7 @@ import { ICreateCustomer } from './../domain/models/ICreateCustomer';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import Customers from '../infra/typeorm/entities/Customers';
-import { CustomerRepository } from '../infra/typeorm/repositories/CustomersRepositoy';
+import { CustomerRepository } from '../infra/typeorm/repositories/CustomersRepository';
 
 export default class CreateCustomerService {
   public static async execute({
@@ -16,7 +16,7 @@ export default class CreateCustomerService {
       throw new AppError('Email address already used');
     }
 
-    const user = customerRepository.create({ name, email });
+    const user = await customerRepository.create({ name, email });
     return await customerRepository.save(user);
   }
 }
