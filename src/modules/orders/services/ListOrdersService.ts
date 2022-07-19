@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
-import Orders from '../typeorm/entities/Orders';
-import OrdersRepository from '../typeorm/repositories/OrdersRepository';
+import Orders from '../infra/typeorm/entities/Orders';
+import OrdersRepository from '../infra/typeorm/repositories/OrdersRepository';
 import RedisCache from '@shared/cache/RedisCache';
 
 export default class ListOrderService {

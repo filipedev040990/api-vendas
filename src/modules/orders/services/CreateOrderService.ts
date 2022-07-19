@@ -2,8 +2,8 @@ import { CustomerRepository } from '@modules/customers/infra/typeorm/repositorie
 import { ProductRepository } from '@modules/products/typeorm/repositories/ProductsRepository';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Orders from '../typeorm/entities/Orders';
-import OrdersRepository from '../typeorm/repositories/OrdersRepository';
+import Orders from '../infra/typeorm/entities/Orders';
+import OrdersRepository from '../infra/typeorm/repositories/OrdersRepository';
 import RedisCache from '@shared/cache/RedisCache';
 
 interface IProduct {
