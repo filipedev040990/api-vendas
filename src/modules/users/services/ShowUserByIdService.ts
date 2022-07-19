@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Users from '../typeorm/entities/Users';
-import { UserRepository } from '../typeorm/repositories/UsersRepository';
+import Users from '../infra/typeorm/entities/Users';
+import { UserRepository } from '../infra/typeorm/repositories/UsersRepository';
 
 export default class ShowUserByIdService {
   public static async execute(id: string): Promise<Users | undefined> {

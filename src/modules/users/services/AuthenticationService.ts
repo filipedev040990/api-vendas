@@ -3,7 +3,7 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { getCustomRepository } from 'typeorm';
 import authConfig from '@config/auth';
-import { UserRepository } from '../typeorm/repositories/UsersRepository';
+import { UserRepository } from '../infra/typeorm/repositories/UsersRepository';
 
 interface IRequest {
   email: string;

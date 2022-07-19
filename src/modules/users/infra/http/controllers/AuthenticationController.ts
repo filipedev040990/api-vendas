@@ -1,6 +1,6 @@
 import { instanceToInstance } from 'class-transformer';
 import { Request, Response } from 'express';
-import AuthenticationService from '../services/AuthenticationService';
+import AuthenticationService from '../../../services/AuthenticationService';
 
 export default class AuthenticationController {
   public static async create(req: Request, res: Response): Promise<Response> {

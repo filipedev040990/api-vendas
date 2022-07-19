@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import CreateUserService from '../services/CreateUserService';
-import DeleteUserService from '../services/DeleteUserService';
-import ListUsersService from '../services/ListUsersService';
-import ShowUserByEmailService from '../services/ShowUserByEmailService';
-import ShowUserByIdService from '../services/ShowUserByIdService';
-import UpdateUserService from '../services/UpdateUserService';
+import CreateUserService from '../../../services/CreateUserService';
+import DeleteUserService from '../../../services/DeleteUserService';
+import ListUsersService from '../../../services/ListUsersService';
+import ShowUserByEmailService from '../../../services/ShowUserByEmailService';
+import ShowUserByIdService from '../../../services/ShowUserByIdService';
+import UpdateUserService from '../../../services/UpdateUserService';
 import { instanceToInstance } from 'class-transformer';
 
 export default class UserController {

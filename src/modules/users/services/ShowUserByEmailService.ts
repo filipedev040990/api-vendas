@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Users from '../typeorm/entities/Users';
-import { UserRepository } from '../typeorm/repositories/UsersRepository';
+import Users from '../infra/typeorm/entities/Users';
+import { UserRepository } from '../infra/typeorm/repositories/UsersRepository';
 
 export default class ShowUserByEmailService {
   public static async execute(email: string): Promise<Users | undefined> {
