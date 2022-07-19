@@ -1,5 +1,5 @@
 import { CustomerRepository } from '@modules/customers/infra/typeorm/repositories/CustomersRepositoy';
-import { ProductRepository } from '@modules/products/typeorm/repositories/ProductsRepository';
+import { ProductRepository } from '@modules/products/infra/typeorm/repositories/ProductsRepository';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import Orders from '../infra/typeorm/entities/Orders';

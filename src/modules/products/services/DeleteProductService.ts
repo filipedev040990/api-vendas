@@ -1,7 +1,7 @@
 import RedisCache from '@shared/cache/RedisCache';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import { ProductRepository } from '../typeorm/repositories/ProductsRepository';
+import { ProductRepository } from '../infra/typeorm/repositories/ProductsRepository';
 
 export default class DeleteProductService {
   public static async execute(id: string): Promise<void> {
