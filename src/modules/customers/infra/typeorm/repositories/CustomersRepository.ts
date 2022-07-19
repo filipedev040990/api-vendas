@@ -7,7 +7,8 @@ export class CustomerRepository implements ICustomersRepository {
   constructor(private ormRepository: Repository<Customers>) {}
 
   public async create({ name, email }: ICreateCustomer): Promise<Customers> {
-    return this.ormRepository.create({ name, email });
+    const customer = this.ormRepository.create({ name, email });
+    return this.ormRepository.save(customer);
   }
 
   public async save(customer: Customers): Promise<Customers> {

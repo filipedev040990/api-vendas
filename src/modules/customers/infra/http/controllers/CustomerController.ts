@@ -1,3 +1,4 @@
+import { CustomerRepository } from './../../../typeorm/repositories/CustomersRepositoy';
 import { Request, Response } from 'express';
 import CreateCustomerService from '../../../services/CreateCustomerService';
 import DeleteCustomerService from '../../../services/DeleteCustomerService';
@@ -13,7 +14,11 @@ export default class CustomerController {
 
   public static async create(req: Request, res: Response): Promise<Response> {
     const { name, email } = req.body;
-    const customer = await CreateCustomerService.execute({ name, email });
+
+    const customerRepository = new CustomerRepository();
+    const createCustomer = new CreateCustomerService(customerRepository);
+
+    const customer = await createCustomer.execute({ name, email });
     return res.status(201).json(customer);
   }
 
