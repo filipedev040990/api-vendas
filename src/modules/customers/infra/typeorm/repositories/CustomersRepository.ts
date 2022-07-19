@@ -1,10 +1,13 @@
 import { ICreateCustomer } from './../../../domain/models/ICreateCustomer';
 import { ICustomersRepository } from '../../../domain/repositories/ICustomersRepository';
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import Customers from '../entities/Customers';
 
 export class CustomerRepository implements ICustomersRepository {
-  constructor(private ormRepository: Repository<Customers>) {}
+  private ormRepository: Repository<Customers>;
+  constructor() {
+    this.ormRepository = getRepository(Customers);
+  }
 
   public async create({ name, email }: ICreateCustomer): Promise<Customers> {
     const customer = this.ormRepository.create({ name, email });
