@@ -9,10 +9,13 @@ import AppError from '@shared/errors/AppError';
 import '@shared/typeorm';
 import uploadConfig from '@config/upload';
 import { pagination } from 'typeorm-pagination';
+import ratelimiter from '@shared/http/middlewares/rateLimiter';
 
 dotenv.config();
 
 const app = express();
+
+app.use(ratelimiter);
 
 app.use(cors());
 app.use(express.json());
@@ -30,7 +33,7 @@ app.use(
         message: error.message,
       });
     }
-    console.log(error)
+    console.log(error);
     return response.status(500).json({
       status: 'error',
       message: 'Internal server error',
