@@ -4,8 +4,9 @@ import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 
 const customerRouter = Router();
+const customerController = new CustomerController();
 
-customerRouter.get('/', isAuthenticated, CustomerController.index);
+customerRouter.get('/', isAuthenticated, customerController.index);
 
 customerRouter.post(
   '/',
@@ -16,7 +17,7 @@ customerRouter.post(
       email: Joi.string().email().required(),
     },
   }),
-  CustomerController.create,
+  customerController.create,
 );
 
 customerRouter.put(
@@ -31,7 +32,7 @@ customerRouter.put(
       email: Joi.string().email().required(),
     },
   }),
-  CustomerController.update,
+  customerController.update,
 );
 
 customerRouter.delete(
@@ -42,7 +43,7 @@ customerRouter.delete(
       id: Joi.string().uuid().required(),
     },
   }),
-  CustomerController.delete,
+  customerController.delete,
 );
 
 customerRouter.get(
@@ -53,7 +54,7 @@ customerRouter.get(
       id: Joi.string().uuid().required(),
     },
   }),
-  CustomerController.listById,
+  customerController.listById,
 );
 
 export default customerRouter;
