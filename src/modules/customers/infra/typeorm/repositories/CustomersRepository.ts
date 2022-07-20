@@ -4,6 +4,7 @@ import { Repository, getRepository } from 'typeorm';
 import Customers from '../entities/Customers';
 import { ICustomerPaginate } from '@modules/customers/domain/models/ICustomerPaginate';
 import { SearchParams } from '../../../domain/repositories/ICustomersRepository';
+
 export class CustomerRepository implements ICustomersRepository {
   private ormRepository: Repository<Customers>;
   constructor() {

@@ -7,3 +7,8 @@ container.registerSingleton<ICustomersRepository>(
   'CustomerRepository',
   CustomerRepository,
 );
+
+import { IOrders } from '@modules/orders/domain/models/IOrders';
+import { OrdersRepository } from '@modules/orders/infra/typeorm/repositories/OrdersRepository';
+
+container.registerSingleton('OrdersRepository', OrdersRepository);
