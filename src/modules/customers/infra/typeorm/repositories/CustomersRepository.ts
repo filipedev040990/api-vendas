@@ -49,4 +49,8 @@ export class CustomerRepository implements ICustomersRepository {
   public async findByName(name: string): Promise<Customers | undefined> {
     return this.ormRepository.findOne({ where: { name } });
   }
+
+  public async remove(customer: Customers): Promise<void> {
+    await this.ormRepository.remove(customer);
+  }
 }

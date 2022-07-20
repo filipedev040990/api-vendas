@@ -30,19 +30,24 @@ export default class CustomerController {
     const { name, email } = req.body;
     const { id } = req.params;
 
-    const customer = await UpdateCustomerService.execute({ id, name, email });
+    const updateCustomer = container.resolve(UpdateCustomerService);
+
+    const customer = await updateCustomer.execute({ id, name, email });
     return res.status(200).json(customer);
   }
 
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    await DeleteCustomerService.execute(id);
+
+    const deleteCustomer = container.resolve(DeleteCustomerService);
+    await deleteCustomer.execute(id);
     return res.status(204).json({});
   }
 
   public async listById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    const customer = await ListCustomerById.execute(id);
+    const customerById = container.resolve(ListCustomerById);
+    const customer = await customerById.execute(id);
     return res.status(200).json(customer);
   }
 }

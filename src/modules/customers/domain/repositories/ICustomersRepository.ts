@@ -15,4 +15,5 @@ export interface ICustomersRepository {
   findAll({ page, skip, take }: SearchParams): Promise<ICustomerPaginate>;
   create(data: ICreateCustomer): Promise<ICustomer>;
   save(customer: ICustomer): Promise<ICustomer>;
+  remove(customer: ICustomer): Promise<void>;
 }
