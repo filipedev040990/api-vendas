@@ -5,6 +5,11 @@ import { IFindProducts } from '@modules/products/domain/models/IFindProducts';
 import { IProduct } from '@modules/products/domain/models/IProduct';
 import { IProductRequest } from '@modules/products/services/CreateProductService';
 
+export interface IUpdateStockProduct {
+  id: string;
+  quantity: number;
+}
+
 export class ProductRepository implements IProductRepository {
   private ormRepository: Repository<Products>;
   constructor() {
@@ -42,5 +47,9 @@ export class ProductRepository implements IProductRepository {
 
   public async remove(product: IProduct): Promise<void> {
     await this.ormRepository.remove(product);
+  }
+
+  public async updateStock(products: IUpdateStockProduct[]): Promise<void> {
+    await this.ormRepository.save(products);
   }
 }

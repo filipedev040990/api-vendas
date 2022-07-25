@@ -4,5 +4,5 @@ export interface IOrderRepository {
   findById(id: string): Promise<IOrders | undefined>;
   createOrder({ customer, products }: ICreateOrder): Promise<IOrders>;
   save(order: IOrders): Promise<IOrders>;
-  findAll(): Promise<any>;
+  findAll(): Promise<IOrders[]>;
 }

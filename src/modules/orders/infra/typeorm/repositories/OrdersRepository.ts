@@ -29,4 +29,8 @@ export class OrdersRepository implements IOrderRepository {
   public async save(order: Orders): Promise<Orders> {
     return this.ormRepository.save(order);
   }
+
+  public async findAll(): Promise<Orders[]> {
+    return await this.ormRepository.find();
+  }
 }

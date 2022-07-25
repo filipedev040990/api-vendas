@@ -13,13 +13,15 @@ export default class OrdersController {
 
   public static async listById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    const order = await ListOrderByIdService.execute(id);
+    const listOrderbyId = container.resolve(ListOrderByIdService);
+    const order = await listOrderbyId.execute(id);
     return res.status(200).json(order);
   }
 
   public static async create(req: Request, res: Response): Promise<Response> {
     const { customer_id, products } = req.body;
-    const order = await CreateOrderService.execute({ customer_id, products });
+    const createOrder = container.resolve(CreateOrderService);
+    const order = await createOrder.execute({ customer_id, products });
     return res.status(200).json(order);
   }
 }

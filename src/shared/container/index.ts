@@ -8,12 +8,12 @@ container.registerSingleton<ICustomersRepository>(
   CustomerRepository,
 );
 
-// import { IOrders } from '@modules/orders/domain/models/IOrders';
-// import { OrdersRepository } from '@modules/orders/infra/typeorm/repositories/OrdersRepository';
+//import { IOrders } from '@modules/orders/domain/models/IOrders';
+import { OrdersRepository } from '@modules/orders/infra/typeorm/repositories/OrdersRepository';
 
-// container.registerSingleton('OrdersRepository', OrdersRepository);
+container.registerSingleton('OrdersRepository', OrdersRepository);
 
-import { IProduct } from '@modules/orders/domain/models/IProduct-old';
+//import { ICreateOrderProducts } from '@modules/orders/domain/models/ICreateOrderProducts';
 import { ProductRepository } from '@modules/products/infra/typeorm/repositories/ProductsRepository';
 
-container.registerSingleton<IProduct>('ProductRepository', ProductRepository);
+container.registerSingleton('ProductRepository', ProductRepository);
