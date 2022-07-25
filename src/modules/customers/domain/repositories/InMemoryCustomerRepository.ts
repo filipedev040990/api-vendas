@@ -1,11 +1,13 @@
 import { ICreateCustomer } from '@modules/customers/domain/models/ICreateCustomer';
-import { ICustomersRepository } from '@modules/customers/domain/repositories/ICustomersRepository';
+import {
+  ICustomersRepository,
+  SearchParams,
+} from '@modules/customers/domain/repositories/ICustomersRepository';
 import { uuid } from 'uuidv4';
 import Customers from '../../infra/typeorm/entities/Customers';
+import { ICustomerPaginate } from '../models/ICustomerPaginate';
 
-export class InMemoryCustomerRepository
-  implements Omit<ICustomersRepository, 'findAll' | 'remove'>
-{
+export class InMemoryCustomerRepository implements ICustomersRepository {
   private customers: Customers[] = [];
 
   public async create({ name, email }: ICreateCustomer): Promise<Customers> {
@@ -33,7 +35,17 @@ export class InMemoryCustomerRepository
     return this.customers.find(customer => customer.id === id);
   }
 
+  public async findAll({
+    page,
+    skip,
+    take,
+  }: SearchParams): Promise<ICustomerPaginate | undefined> {
+    return undefined;
+  }
+
   public async findByName(name: string): Promise<Customers | undefined> {
     return this.customers.find(customer => customer.name === name);
   }
+
+  public async remove(customer: Customers): Promise<void> {}
 }
