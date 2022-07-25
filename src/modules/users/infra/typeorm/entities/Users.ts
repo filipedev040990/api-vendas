@@ -1,14 +1,15 @@
 import {
-  Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  Entity,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { IUser } from '@modules/users/domain/models/IUser';
 
 @Entity('users')
-class Users {
+class Users implements IUser {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

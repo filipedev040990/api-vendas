@@ -10,6 +10,8 @@ const userRouter = Router();
 
 const upload = multer(uploadConfig);
 
+userRouter.get('/email=:email', isAuthenticated, UserController.showByEmail);
+
 userRouter.get('/', isAuthenticated, UserController.index);
 
 userRouter.patch(

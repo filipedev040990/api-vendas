@@ -6,23 +6,27 @@ import ShowUserByEmailService from '../../../services/ShowUserByEmailService';
 import ShowUserByIdService from '../../../services/ShowUserByIdService';
 import UpdateUserService from '../../../services/UpdateUserService';
 import { instanceToInstance } from 'class-transformer';
+import { container } from 'tsyringe';
 
 export default class UserController {
   public static async index(req: Request, res: Response): Promise<Response> {
-    const users = await ListUsersService.execute();
+    const listUser = container.resolve(ListUsersService);
+    const users = await listUser.execute();
     return res.status(200).json(instanceToInstance(users));
   }
 
   public static async create(req: Request, res: Response): Promise<Response> {
     const { name, email, password } = req.body;
-    const user = await CreateUserService.execute({ name, email, password });
+    const createUser = container.resolve(CreateUserService);
+    const user = await createUser.execute({ name, email, password });
     return res.status(201).json(user);
   }
 
   public static async update(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
     const { name, email, password, old_password } = req.body;
-    const user = await UpdateUserService.execute({
+    const userUpdate = container.resolve(UpdateUserService);
+    const user = await userUpdate.execute({
       id,
       name,
       email,
@@ -35,7 +39,8 @@ export default class UserController {
 
   public static async showById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    const user = await ShowUserByIdService.execute(id);
+    const listUser = container.resolve(ShowUserByIdService);
+    const user = await listUser.execute(id);
 
     return res.status(200).json(instanceToInstance(user));
   }
@@ -45,14 +50,16 @@ export default class UserController {
     res: Response,
   ): Promise<Response> {
     const { email } = req.params;
-    const user = await ShowUserByEmailService.execute(email);
+    const showUserByEmail = container.resolve(ShowUserByEmailService);
+    const user = await showUserByEmail.execute(email);
 
     return res.status(200).json(user);
   }
 
   public static async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    await DeleteUserService.execute(id);
+    const deleteUser = container.resolve(DeleteUserService);
+    await deleteUser.execute(id);
     return res.status(200).json({});
   }
 }

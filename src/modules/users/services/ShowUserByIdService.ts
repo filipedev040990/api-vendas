@@ -1,12 +1,16 @@
+import { IUserRepository } from '@modules/users/domain/repositories/IUserRepository';
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
+import { inject, injectable } from 'tsyringe';
 import Users from '../infra/typeorm/entities/Users';
-import { UserRepository } from '../infra/typeorm/repositories/UsersRepository';
 
+@injectable()
 export default class ShowUserByIdService {
-  public static async execute(id: string): Promise<Users | undefined> {
-    const userRepository = getCustomRepository(UserRepository);
-    const user = await userRepository.findById(id);
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository,
+  ) {}
+  public async execute(id: string): Promise<Users | undefined> {
+    const user = await this.userRepository.findById(id);
 
     if (!user) {
       throw new AppError('User not found');

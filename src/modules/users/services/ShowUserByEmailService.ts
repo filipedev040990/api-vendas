@@ -1,17 +1,20 @@
+import { IUserRepository } from '@modules/users/domain/repositories/IUserRepository';
 import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
+import { inject, injectable } from 'tsyringe';
 import Users from '../infra/typeorm/entities/Users';
-import { UserRepository } from '../infra/typeorm/repositories/UsersRepository';
 
+@injectable()
 export default class ShowUserByEmailService {
-  public static async execute(email: string): Promise<Users | undefined> {
-    const userRepository = getCustomRepository(UserRepository);
-    const user = userRepository.findByEmail(email);
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository,
+  ) {}
+  public async execute(email: string): Promise<Users | undefined> {
+    const user = this.userRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError('User not found');
     }
-
     return user;
   }
 }

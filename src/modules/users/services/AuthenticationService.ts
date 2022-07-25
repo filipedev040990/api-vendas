@@ -1,9 +1,9 @@
+import { IUserRepository } from './../domain/repositories/IUserRepository';
 import AppError from '@shared/errors/AppError';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import { getCustomRepository } from 'typeorm';
 import authConfig from '@config/auth';
-import { UserRepository } from '../infra/typeorm/repositories/UsersRepository';
+import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
   email: string;
@@ -15,14 +15,14 @@ interface IResponse {
   token: string;
 }
 
+@injectable()
 export default class AuthenticationService {
-  public static async execute({
-    email,
-    password,
-  }: IRequest): Promise<IResponse> {
-    const userRepository = getCustomRepository(UserRepository);
-
-    const user = await userRepository.findByEmail(email);
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository,
+  ) {}
+  public async execute({ email, password }: IRequest): Promise<IResponse> {
+    const user = await this.userRepository.findByEmail(email);
     if (!user) {
       throw new AppError('Invalid user/password', 401);
     }

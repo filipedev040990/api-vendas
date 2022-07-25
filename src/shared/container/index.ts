@@ -17,3 +17,9 @@ container.registerSingleton('OrdersRepository', OrdersRepository);
 import { ProductRepository } from '@modules/products/infra/typeorm/repositories/ProductsRepository';
 
 container.registerSingleton('ProductRepository', ProductRepository);
+
+import { UserRepository } from '@modules/users/infra/typeorm/repositories/UserRepository';
+container.registerSingleton('UserRepository', UserRepository);
+
+import { UserTokensRepository } from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
+container.registerSingleton('UserTokensRepository', UserTokensRepository);
