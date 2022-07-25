@@ -4,12 +4,17 @@ import CreateCustomerService from './CreateCustomerService';
 import { InMemoryCustomerRepository } from '../domain/repositories/InMemoryCustomerRepository';
 
 describe('CreateCustomerService', () => {
-  test('should be able to create a new customer', async () => {
-    const inMemoryCustomerRepository = new InMemoryCustomerRepository();
-    const createCustomerService = new CreateCustomerService(
+  let inMemoryCustomerRepository: InMemoryCustomerRepository;
+  let createCustomerService: CreateCustomerService;
+
+  beforeEach(() => {
+    inMemoryCustomerRepository = new InMemoryCustomerRepository();
+    createCustomerService = new CreateCustomerService(
       inMemoryCustomerRepository,
     );
+  });
 
+  test('should be able to create a new customer', async () => {
     const customer = await createCustomerService.execute({
       name: 'Filipe Siqueira',
       email: 'filipe@email.com.br',
@@ -18,11 +23,6 @@ describe('CreateCustomerService', () => {
   });
 
   test('should not be able to create two customer with the same email', async () => {
-    const inMemoryCustomerRepository = new InMemoryCustomerRepository();
-    const createCustomerService = new CreateCustomerService(
-      inMemoryCustomerRepository,
-    );
-
     await createCustomerService.execute({
       name: 'Filipe Siqueira',
       email: 'filipe@email.com.br',
