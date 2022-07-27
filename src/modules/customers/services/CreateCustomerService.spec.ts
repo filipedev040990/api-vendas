@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import AppError from '@shared/errors/AppError';
 import { InMemoryCustomerRepository } from './../domain/repositories/InMemoryCustomerRepository';
 import CreateCustomerService from './CreateCustomerService';
