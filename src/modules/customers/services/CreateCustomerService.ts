@@ -16,6 +16,10 @@ export default class CreateCustomerService {
     if (emailExists) {
       throw new AppError('Email address already used');
     }
+
+    if (!name || name == '') {
+      throw new AppError('Name is missing');
+    }
     return await this.customerRepository.create({ name, email });
   }
 }
