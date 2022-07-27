@@ -1,4 +1,3 @@
-import AppError from '@shared/errors/AppError';
 import { ICreateCustomer } from './../../../domain/models/ICreateCustomer';
 import { ICustomersRepository } from '../../../domain/repositories/ICustomersRepository';
 import { Repository, getRepository } from 'typeorm';
