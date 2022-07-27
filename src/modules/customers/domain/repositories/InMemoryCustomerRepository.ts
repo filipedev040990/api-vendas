@@ -8,7 +8,15 @@ import Customers from '../../infra/typeorm/entities/Customers';
 import { ICustomerPaginate } from '../models/ICustomerPaginate';
 
 export class InMemoryCustomerRepository implements ICustomersRepository {
-  private customers: Customers[] = [];
+  private customers: Customers[] = [
+    {
+      id: '123456',
+      name: 'Teste',
+      email: 'teste@gmail.com',
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+  ];
 
   public async create({ name, email }: ICreateCustomer): Promise<Customers> {
     const customer = new Customers();
@@ -50,5 +58,7 @@ export class InMemoryCustomerRepository implements ICustomersRepository {
     return this.customers.find(customer => customer.name === name);
   }
 
-  public async remove(customer: Customers): Promise<void> {}
+  public async remove(customer: Customers): Promise<void> {
+    this.customers = this.customers.filter(c => c.id !== customer.id);
+  }
 }
