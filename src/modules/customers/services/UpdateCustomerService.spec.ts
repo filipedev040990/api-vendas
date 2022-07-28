@@ -8,18 +8,17 @@ describe('Update Customer', () => {
   let inMemoryRepository: InMemoryCustomerRepository;
   let updateCustomer: UpdateCustomerService;
   let createCustomer: CreateCustomerService;
-  let input: { id: string; name: string; email: string };
+
+  const input = {
+    id: '123456',
+    name: 'Name updated',
+    email: 'emailupdated@email.com',
+  };
 
   beforeEach(() => {
     inMemoryRepository = new InMemoryCustomerRepository();
     updateCustomer = new UpdateCustomerService(inMemoryRepository);
     createCustomer = new CreateCustomerService(inMemoryRepository);
-
-    input = {
-      id: '123456',
-      name: 'Name updated',
-      email: 'emailupdated@email.com',
-    };
   });
 
   test('should be able to update a customer', async () => {
