@@ -16,7 +16,7 @@ export default class ListCustomersService {
   public async execute({
     page,
     limit,
-  }: SearchParams): Promise<ICustomerPaginate> {
+  }: SearchParams): Promise<ICustomerPaginate | undefined> {
     const take = limit;
     const skip = (Number(page) - 1) * take;
     return await this.customerRepository.findAll({
