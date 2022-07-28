@@ -10,6 +10,6 @@ export interface IProductRepository {
   findbyId(id: string): Promise<IProduct | undefined>;
   create({ name, price, quantity }: IProductRequest): Promise<IProduct>;
   save(product: IProduct): Promise<IProduct>;
-  remove(product: IProduct): Promise<void>;
+  remove(id: string): Promise<void>;
   updateStock(products: IUpdateStockProduct[]): Promise<void>;
 }
