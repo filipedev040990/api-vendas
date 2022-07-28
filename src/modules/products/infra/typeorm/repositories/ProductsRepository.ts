@@ -45,8 +45,8 @@ export class ProductRepository implements IProductRepository {
     return await this.ormRepository.save(product);
   }
 
-  public async remove(product: IProduct): Promise<void> {
-    await this.ormRepository.remove(product);
+  public async remove(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
   }
 
   public async updateStock(products: IUpdateStockProduct[]): Promise<void> {
