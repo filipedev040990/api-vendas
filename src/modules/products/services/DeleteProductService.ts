@@ -20,6 +20,6 @@ export default class DeleteProductService {
 
     await redisCache.invalidate('api-vendas-PRODUCT_LIST');
 
-    await this.productRepository.remove(product);
+    await this.productRepository.remove(product.id);
   }
 }
