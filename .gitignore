@@ -31,6 +31,7 @@ typings/
 *.tgz
 .yarn-integrity
 .env
+.sh
 .env.test
 .cache
 .next

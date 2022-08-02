@@ -19,7 +19,7 @@ export default class UserController {
     const { name, email, password } = req.body;
     const createUser = container.resolve(CreateUserService);
     const user = await createUser.execute({ name, email, password });
-    return res.status(201).json(user);
+    return res.status(201).json(instanceToInstance(user));
   }
 
   public static async update(req: Request, res: Response): Promise<Response> {
@@ -53,7 +53,7 @@ export default class UserController {
     const showUserByEmail = container.resolve(ShowUserByEmailService);
     const user = await showUserByEmail.execute(email);
 
-    return res.status(200).json(user);
+    return res.status(200).json(instanceToInstance(user));
   }
 
   public static async delete(req: Request, res: Response): Promise<Response> {
