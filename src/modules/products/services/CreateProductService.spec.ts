@@ -12,7 +12,6 @@ export type IProductRequest = {
 describe('Create Product', () => {
   let inMemoryRepository: InMemoryProductRepository;
   let createProduct: CreateProductService;
-
   let input: IProductRequest;
 
   beforeEach(() => {
@@ -23,7 +22,7 @@ describe('Create Product', () => {
       name: 'Product name',
       price: 1000,
       quantity: 5,
-    }
+    };
   });
 
   test('should be able to create a new Product', async () => {

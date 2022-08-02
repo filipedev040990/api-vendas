@@ -9,7 +9,17 @@ import { uuid } from 'uuidv4';
 export class InMemoryProductRepository
   implements Omit<IProductRepository, 'save' | 'remove' | 'updateStock'>
 {
-  private products: Products[] = [];
+  private products: Products[] = [
+    {
+      id: 'fakeId',
+      name: 'Product Fake',
+      price: 1,
+      quantity: 1,
+      created_at: new Date(),
+      updated_at: new Date(),
+      order_products: [],
+    },
+  ];
 
   public async findByName(name: string): Promise<IProduct | undefined> {
     return undefined;
@@ -24,7 +34,7 @@ export class InMemoryProductRepository
   }
 
   public async findbyId(id: string): Promise<IProduct | undefined> {
-    return undefined;
+    return this.products.find(product => product.id === id);
   }
 
   public async create({

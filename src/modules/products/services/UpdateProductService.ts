@@ -4,12 +4,12 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import Product from '../infra/typeorm/entities/Products';
 
-interface IRequest {
+export type IUpdateProductRequest = {
   id: string;
   name: string;
   price: number;
   quantity: number;
-}
+};
 
 @injectable()
 export default class UpdateProductService {
@@ -22,7 +22,7 @@ export default class UpdateProductService {
     name,
     price,
     quantity,
-  }: IRequest): Promise<Product> {
+  }: IUpdateProductRequest): Promise<Product> {
     const product = await this.productRepository.findbyId(id);
 
     if (!product) {
