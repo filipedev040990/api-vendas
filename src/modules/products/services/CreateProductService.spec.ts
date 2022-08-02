@@ -13,15 +13,17 @@ describe('Create Product', () => {
   let inMemoryRepository: InMemoryProductRepository;
   let createProduct: CreateProductService;
 
-  const input = {
-    name: 'Product name',
-    price: 1000,
-    quantity: 5,
-  };
+  let input: IProductRequest;
 
   beforeEach(() => {
     inMemoryRepository = new InMemoryProductRepository();
     createProduct = new CreateProductService(inMemoryRepository);
+
+    input = {
+      name: 'Product name',
+      price: 1000,
+      quantity: 5,
+    }
   });
 
   test('should be able to create a new Product', async () => {
@@ -36,5 +38,15 @@ describe('Create Product', () => {
   test('should not be able to create two products with equal name', async () => {
     await createProduct.execute(input);
     expect(createProduct.execute(input)).rejects.toBeInstanceOf(AppError);
+  });
+
+  test('should not be able to create a new Product if price is less zero', async () => {
+    input.price = -1;
+    await expect(createProduct.execute(input)).rejects.toBeInstanceOf(AppError);
+  });
+
+  test('should not be able to create a new Product if quantity is less zero', async () => {
+    input.quantity = -1;
+    await expect(createProduct.execute(input)).rejects.toBeInstanceOf(AppError);
   });
 });
